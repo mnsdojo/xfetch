@@ -15,6 +15,7 @@ var icons = map[string]string{
 	"Battery": "🔋",
 	"CPU":     "⏣",
 	"Memory":  "▤",
+	"Disk":    "💽", // Added Disk icon
 }
 
 func PrintInfo(label, value string, labelColor color.Color) {

@@ -29,6 +29,7 @@ func main() {
 	ui.PrintInfo("Shell", info.GetShell(), color.Cyan)
 	ui.PrintInfo("CPU", info.GetCPUInfo(), color.Yellow)
 	ui.PrintInfo("Memory", info.GetMemoryInfo(), color.FgMagenta)
+	ui.PrintInfo("Disk", info.GetDiskInfo(), color.FgGray)
 
 	fmt.Println("└────────────────────────────────────────────────────────────┘")
 

@@ -9,9 +9,22 @@ import (
 
 	"github.com/distatus/battery"
 	"github.com/shirou/gopsutil/cpu"
+	"github.com/shirou/gopsutil/disk"
 	"github.com/shirou/gopsutil/host"
 	"github.com/shirou/gopsutil/mem"
 )
+
+func GetDiskInfo() string {
+	usage, err := disk.Usage("/")
+	if err != nil {
+		return "N/A"
+	}
+
+	total := float64(usage.Total) / (1024 * 1024 * 1024) // Convert to GiB
+	used := float64(usage.Used) / (1024 * 1024 * 1024)   // Convert to GiB
+
+	return fmt.Sprintf("%.2f GiB used / %.2f GiB total (%.0f%% used)", used, total, usage.UsedPercent)
+}
 
 func GetOSInfo() string {
 	hostInfo, _ := host.Info()
@@ -54,16 +67,15 @@ func GetMemoryInfo() string {
 	return fmt.Sprintf("%.2f GiB / %.2f GiB (%.0f%%)", float64(v.Used)/(1024*1024*1024), float64(v.Total)/(1024*1024*1024), v.UsedPercent)
 }
 
-
 func GetBatteryInfo() string {
 	batteries, err := battery.GetAll()
-		if err != nil || len(batteries) == 0 {
-			return "N/A"
-		}
+	if err != nil || len(batteries) == 0 {
+		return "N/A"
+	}
 
-		// We'll just use the first battery
-		bat := batteries[0]
-		percentage := bat.Current / bat.Full * 100
+	// We'll just use the first battery
+	bat := batteries[0]
+	percentage := bat.Current / bat.Full * 100
 
-		return fmt.Sprintf("%.0f%%", percentage)
+	return fmt.Sprintf("%.0f%%", percentage)
 }
