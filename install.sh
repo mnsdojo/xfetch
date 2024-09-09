@@ -23,8 +23,14 @@ fi
 # Build the program
 go build -o xfetch 
 
+# Set the correct permissions
+chmod +x xfetch
+
 # Move the binary to /usr/local/bin
 sudo mv xfetch /usr/local/bin/
+
+# Ensure the permissions are correct after moving
+sudo chmod 755 /usr/local/bin/xfetch
 
 # Clean up
 cd ..
