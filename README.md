@@ -16,4 +16,5 @@ xfetch is a lightweight, fast, and customizable system information fetching tool
 ## Installation
 
 You can easily install xfetch directly from this GitHub repository using the following command:
-
+```bash
+curl -sSL https://raw.githubusercontent.com/mnsdojo/xfetch/install.sh | bash
