@@ -3,6 +3,7 @@ package info
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"runtime"
 	"time"
 
@@ -37,7 +38,7 @@ func GetShell() string {
 	if shell == "" {
 		return "Unknown"
 	}
-	return shell
+	return filepath.Base(shell)
 }
 
 func GetCPUInfo() string {
