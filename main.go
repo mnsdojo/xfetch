@@ -16,8 +16,6 @@ func main() {
 		username = os.Getenv("USERNAME") // For Windows
 	}
 
-
-
 	// Print username@hostname
 	color.Cyan.Printf("%s@%s\n\n", username, hostname)
 
@@ -27,6 +25,7 @@ func main() {
 	ui.PrintInfo("Machine", info.GetMachineInfo(), color.FgGreen)
 	ui.PrintInfo("Kernel", info.GetKernelInfo(), color.FgMagenta)
 	ui.PrintInfo("Uptime", info.GetUptime(), color.FgRed)
+	ui.PrintInfo("Battery", info.GetBatteryInfo(), color.FgGreen)
 	ui.PrintInfo("Shell", info.GetShell(), color.Cyan)
 	ui.PrintInfo("CPU", info.GetCPUInfo(), color.Yellow)
 	ui.PrintInfo("Memory", info.GetMemoryInfo(), color.FgMagenta)

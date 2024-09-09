@@ -7,6 +7,7 @@ import (
 	"runtime"
 	"time"
 
+	"github.com/distatus/battery"
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/shirou/gopsutil/host"
 	"github.com/shirou/gopsutil/mem"
@@ -26,7 +27,6 @@ func GetKernelInfo() string {
 	hostInfo, _ := host.Info()
 	return hostInfo.KernelVersion
 }
-
 func GetUptime() string {
 	hostInfo, _ := host.Info()
 	uptime := time.Duration(hostInfo.Uptime) * time.Second
@@ -52,4 +52,18 @@ func GetCPUInfo() string {
 func GetMemoryInfo() string {
 	v, _ := mem.VirtualMemory()
 	return fmt.Sprintf("%.2f GiB / %.2f GiB (%.0f%%)", float64(v.Used)/(1024*1024*1024), float64(v.Total)/(1024*1024*1024), v.UsedPercent)
+}
+
+
+func GetBatteryInfo() string {
+	batteries, err := battery.GetAll()
+		if err != nil || len(batteries) == 0 {
+			return "N/A"
+		}
+
+		// We'll just use the first battery
+		bat := batteries[0]
+		percentage := bat.Current / bat.Full * 100
+
+		return fmt.Sprintf("%.0f%%", percentage)
 }

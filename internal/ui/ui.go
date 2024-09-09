@@ -12,6 +12,7 @@ var icons = map[string]string{
 	"Kernel":  "⚙",
 	"Uptime":  "◷",
 	"Shell":   "⌘",
+	"Battery": "🔋",
 	"CPU":     "⏣",
 	"Memory":  "▤",
 }
