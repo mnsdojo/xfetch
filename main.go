@@ -30,6 +30,7 @@ func main() {
 	ui.PrintInfo("CPU", info.GetCPUInfo(), color.Yellow)
 	ui.PrintInfo("Memory", info.GetMemoryInfo(), color.FgMagenta)
 	ui.PrintInfo("Disk", info.GetDiskInfo(), color.FgGray)
+	ui.PrintInfo("CpuTemp", info.GetCPUTemperature(), color.FgMagenta)
 
 	fmt.Println("└────────────────────────────────────────────────────────────┘")
 

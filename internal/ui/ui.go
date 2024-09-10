@@ -7,15 +7,16 @@ import (
 )
 
 var icons = map[string]string{
-	"OS":      "🍎",
-	"Machine": "□",
-	"Kernel":  "⚙",
-	"Uptime":  "◷",
-	"Shell":   "⌘",
+	"OS":      "🖥️",
+	"Machine": "🏠",
+	"Kernel":  "🐧",
+	"Uptime":  "⏳",
+	"Shell":   "🐚",
 	"Battery": "🔋",
-	"CPU":     "⏣",
-	"Memory":  "▤",
-	"Disk":    "💽", // Added Disk icon
+	"CPU":     "🧠",
+	"Memory":  "🧩",
+	"Disk":    "💾",
+	"CpuTemp": "🌡️",
 }
 
 func PrintInfo(label, value string, labelColor color.Color) {

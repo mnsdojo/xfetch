@@ -2,9 +2,13 @@ package info
 
 import (
 	"fmt"
+	"log"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"runtime"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/distatus/battery"
@@ -13,6 +17,24 @@ import (
 	"github.com/shirou/gopsutil/host"
 	"github.com/shirou/gopsutil/mem"
 )
+
+func GetCPUTemperature() string {
+	cmd := exec.Command("cat", "/sys/class/thermal/thermal_zone0/temp")
+	output, err := cmd.Output()
+	if err != nil {
+		log.Fatalf("Failed to get cpu temp :%v", err)
+	}
+	tempStr := strings.TrimSpace(string(output))
+
+	// convert the temperature string to an integer
+	tempInt, err := strconv.Atoi(tempStr)
+	if err != nil {
+		log.Fatalf("Failed to convert temp to integer :%v", err)
+	}
+	tempCelcius := float64(tempInt) / 1000.0
+	// Print the temperature with the degree symbol and "C"
+	return fmt.Sprintf(" %.1f°C\n", tempCelcius)
+}
 
 func GetDiskInfo() string {
 	usage, err := disk.Usage("/")
@@ -40,6 +62,7 @@ func GetKernelInfo() string {
 	hostInfo, _ := host.Info()
 	return hostInfo.KernelVersion
 }
+
 func GetUptime() string {
 	hostInfo, _ := host.Info()
 	uptime := time.Duration(hostInfo.Uptime) * time.Second
