@@ -10,7 +10,11 @@ import (
 )
 
 func main() {
-	hostname, _ := os.Hostname()
+	hostname, err := os.Hostname()
+	if err != nil {
+		fmt.Println("Error retrieving hostname:", err)
+		return
+	}
 	username := os.Getenv("USER")
 	if username == "" {
 		username = os.Getenv("USERNAME") // For Windows
